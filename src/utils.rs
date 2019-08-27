@@ -66,6 +66,12 @@ pub fn get_list_items_from_matches(
 
     let mut my_vec: Vec<ListItem> = vec![];
     for item in matches.args.iter() {
+        if item.1.vals.len() < 1 {
+          // skip args that do not contain values,
+          // eg: true/false flags
+          continue;
+        }
+
         let question = item.0;
         let default = item.1.vals[0].clone();
         let default_answer = &default.into_string().unwrap();
