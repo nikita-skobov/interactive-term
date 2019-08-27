@@ -1,20 +1,7 @@
-mod styles;
+pub mod styles;
+pub mod utils;
+pub mod interactive;
 
-pub fn stuff() {
-    println!("dsadsadsa");
-}
-
-pub mod my_mod {
-    pub fn stuff2() {
-        println!("dsadsa");
-    }
-}
-
-pub mod my_mod2 {
-    pub fn stuff3() {
-        println!("dsadsadsadsadsadsad");
-    }
-}
 
 #[cfg(test)]
 mod tests {
