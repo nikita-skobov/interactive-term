@@ -1,3 +1,5 @@
+mod styles;
+
 pub fn stuff() {
     println!("dsadsadsa");
 }
