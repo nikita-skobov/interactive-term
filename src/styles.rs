@@ -1,12 +1,13 @@
 use yaml_rust::{Yaml};
 use crossterm::{Color, style};
 
+#[derive(Debug, Clone)]
 pub struct TextStyle {
-    text: String,
-    background: Option<Color>,
-    color: Option<Color>,
-    highlighted_color: Option<Color>,
-    highlighted_background: Option<Color>,
+    pub text: String,
+    pub background: Option<Color>,
+    pub color: Option<Color>,
+    pub highlighted_color: Option<Color>,
+    pub highlighted_background: Option<Color>,
 }
 
 impl TextStyle {
