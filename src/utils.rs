@@ -5,14 +5,14 @@ use super::styles::TextStyle;
 
 #[derive(Debug, Clone)]
 pub struct ListItem {
-  regular_output: String,
-  highlighted_output: String,
-  question: String,
-  answer: String,
-  prefix_style: TextStyle,
-  question_style: TextStyle,
-  delimiter_style: TextStyle,
-  answer_style: TextStyle,
+  pub regular_output: String,
+  pub highlighted_output: String,
+  pub question: String,
+  pub answer: String,
+  pub prefix_style: TextStyle,
+  pub question_style: TextStyle,
+  pub delimiter_style: TextStyle,
+  pub answer_style: TextStyle,
 }
 
 impl ListItem {
