@@ -25,11 +25,14 @@ fn main() {
     );
 
     match interactive::interact(&mut my_list_items) {
-        Err(e) => panic!("FAILED TO GET INTERACTIVE ANSWERS: {:?}", e);
+        Err(e) => panic!("FAILED TO GET INTERACTIVE ANSWERS: {:?}", e),
         _ => (),
     };
 
-    // match 
+    let new_matches = utils::replace_matches_from_list_items(
+        &clap_matches,
+        &my_list_items,
+    );
 
-    println!("matches: {:?}", clap_matches);
+    println!("matches: {:?}", new_matches);
 }

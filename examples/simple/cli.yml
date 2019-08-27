@@ -1,6 +1,6 @@
 name: myapp
 version: "1.0"
-author: Kevin K. <kbknapp@gmail.com>
+author: Me
 about: Does awesome things
 interactive_questions:
   - verbose:
@@ -28,12 +28,10 @@ interactive_style:
     highlighted_color: red
     highlighted_background: dark_blue
   delimiter:
-    text: ": \n"
+    text: " : "
   answer:
     color: yellow
     text: "dsadsadsadsa\n\n"
-    # color: white
-    # background: dark_red
 
 args:
   - config:

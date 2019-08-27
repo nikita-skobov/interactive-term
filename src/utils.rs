@@ -101,3 +101,25 @@ pub fn get_list_items_from_matches(
 
     my_vec
 }
+
+pub fn replace_matches_from_list_items<'a, 'b>(
+    matches: &'a ArgMatches<'b>,
+    list: &'b Vec<ListItem>,
+) -> ArgMatches<'b> {
+    let mut cloned_args = matches.args.clone();
+
+    for listitem in list.iter() {
+        if let Some(match_item) = cloned_args.get::<str>(&listitem.question) {
+            let mut item_clone = match_item.clone();
+            cloned_args.remove::<str>(&listitem.question);
+            item_clone.vals[0] = std::ffi::OsString::from(&listitem.answer);
+            cloned_args.insert(&listitem.question, item_clone);
+        }
+    }
+
+    ArgMatches {
+        args: cloned_args,
+        subcommand: matches.subcommand.clone(),
+        usage:  matches.usage.clone(),
+    }
+}
