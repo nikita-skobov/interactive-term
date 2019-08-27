@@ -1,0 +1,140 @@
+name: myapp
+version: "1.0"
+author: Kevin K. <kbknapp@gmail.com>
+about: Does awesome things
+interactive_questions:
+  - verbose:
+      default: some other default
+      background: green
+      # can also include custom highlighting for this specific question
+  # verbose has a default value of empty string,
+  # in case user is in interactive mode
+  # we want to assign a different default to verbose.
+  - something else: ''
+  # something else does not appear in the args list.
+  # if we parse these interactive_questions, we can append the list items
+  # in the interactive mode with this field. in this case the default is
+  # an empty string
+interactive_exclude:
+  - config # prevent the arg name config
+  # from showing up in the interactive list.
+  # if config provided by user, that value is the value used.
+  # or if default value, then the default is used. but interactive mode
+  # does not allow modification
+interactive_style:
+  prefix:
+    text: '> '
+  question:
+    highlighted_color: red
+    highlighted_background: dark_blue
+  delimiter:
+    text: ": \n"
+  answer:
+    color: yellow
+    text: "dsadsadsadsa\n\n"
+    # color: white
+    # background: dark_red
+
+args:
+  - config:
+      short: c
+      long: config
+      value_name: FILE
+      help: Sets a custom config file
+      takes_value: true
+      default_value: rr43 gtreytret retrewr ewrew rewr ewr ewr
+  - verbose:
+      short: a
+      help: Sets the level of verbosity
+      takes_value: true
+      default_value: ''
+  - verbose2:
+      short: b
+      help: Sets the level of verbosity
+      takes_value: true
+      default_value: verbooos?
+  - verbose3:
+      short: d
+      help: Sets the level of verbosity
+      takes_value: true
+      default_value: verbooos?
+  - verbose4:
+      short: v
+      help: Sets the level of verbosity
+      takes_value: true
+      default_value: verbooos?
+  - verbose5:
+      short: z
+      help: Sets the level of verbosity
+      takes_value: true
+      default_value: verbooos?
+  - verbose6:
+      short: l
+      help: Sets the level of verbosity
+      takes_value: true
+      default_value: verbooos?
+  - verbose7:
+      short: q
+      help: Sets the level of verbosity
+      takes_value: true
+      default_value: verbooos?
+  - verbose8:
+      short: r
+      help: Sets the level of verbosity
+      takes_value: true
+      default_value: verbooos?
+  - verbose9:
+      short: t
+      help: Sets the level of verbosity
+      takes_value: true
+      default_value: verbooos?
+      env: red
+  - verbose10:
+      help: Sets the level of verbosity
+      takes_value: true
+      default_value: verbooos?
+  - verbose11:
+      help: Sets the level of verbosity
+      takes_value: true
+      default_value: verbooos?
+  - verbose12:
+      help: Sets the level of verbosity
+      takes_value: true
+      default_value: verbooos?
+  - verbose13:
+      help: Sets the level of verbosity
+      takes_value: true
+      default_value: verbooos?
+  - verbose14:
+      help: Sets the level of verbosity
+      takes_value: true
+      default_value: verbooos?
+  - verbose15:
+      short: u
+      help: Sets the level of verbosity
+      takes_value: true
+      default_value: verbooos?
+  - verbose16:
+      short: x
+      help: Sets the level of verbosity
+      takes_value: true
+      default_value: verbooos?
+  - verbose17:
+      short: y
+      help: Sets the level of verbosity
+      takes_value: true
+      default_value: verbooos?        
+  - some var with spaces?:
+      short: n
+      value_name: spacess
+      long: some_var
+      help: pls help they stole my kidneys
+      takes_value: true
+  - is the current folder a git repo?:
+      long: is_git_repo
+      value_name: ''
+      possible_values:
+        - 'true'
+        - 'false'
+      help: is the current working directory a git repo?
+      default_value: 'true'

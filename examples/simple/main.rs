@@ -24,7 +24,10 @@ fn main() {
         &my_styles,
     );
 
-    interactive::interact();
+    match interactive::interact(&mut my_list_items) {
+        Err(e) => panic!("FAILED TO GET INTERACTIVE ANSWERS: {:?}", e);
+        _ => (),
+    };
 
     // match 
 
