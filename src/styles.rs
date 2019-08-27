@@ -57,15 +57,131 @@ impl TextStyle {
     }
 }
 
-// pub fn get_styles_from_yaml(yaml_obj: &Yaml) -> (
+pub fn get_color_from_word(word: &str) -> Color {
+  match word {
+    "black" => Color::Black,
+    "red" => Color::Red,
+    "dark_red" => Color::DarkRed,
+    "green" => Color::Green,
+    "dark_green" => Color::DarkGreen,
+    "yellow" => Color::Yellow,
+    "dark_yellow" => Color::DarkYellow,
+    "blue" => Color::Blue,
+    "dark_blue" => Color::DarkBlue,
+    "magenta" => Color::Magenta,
+    "dark_magenta" => Color::DarkMagenta,
+    "cyan" => Color::Cyan,
+    "dark_cyan" => Color::DarkCyan,
+    "gray" => Color::Grey,
+    "grey" => Color::Grey,
+    "white" => Color::White,
+    "dark_white" => Color::Black,
+    "reset" => Color::Reset,
+    _ => Color::Reset,
+  }
+}
 
-// ) {
+pub fn parse_yaml_style(yaml_obj: &Yaml) -> TextStyle {
+  let mut text = "".to_string();
+  let mut color = Some(Color::Reset);
+  let mut background = Some(Color::Reset);
+  let mut highlighted_background = Some(Color::Reset);
+  let mut highlighted_color = Some(Color::Reset);
 
-// }
+  if let Some(t) = yaml_obj["text"].as_str() {
+    text = String::from(t);
+  }
+  if let Some(c) = yaml_obj["color"].as_str() {
+    color = Some(get_color_from_word(c));
+  }
+  if let Some(bc) = yaml_obj["background"].as_str() {
+    background = Some(get_color_from_word(bc));
+  }
+  if let Some(hb) = yaml_obj["highlighted_background"].as_str() {
+    highlighted_background = Some(get_color_from_word(hb));
+  }
+  if let Some(hc) = yaml_obj["highlighted_color"].as_str() {
+    highlighted_color = Some(get_color_from_word(hc));
+  }
+
+  TextStyle {
+    text,
+    color,
+    background,
+    highlighted_background,
+    highlighted_color,
+  }
+}
+
+pub fn get_styles_from_yaml(yaml_obj: &Yaml) -> (
+    TextStyle,
+    TextStyle,
+    TextStyle,
+    TextStyle,
+) {
+  let mut prefix_style = TextStyle {
+    text: "".to_string(),
+    color: None,
+    background: None,
+    highlighted_background: None,
+    highlighted_color: None,
+  };
+
+  let mut question_style = TextStyle {
+    text: "".to_string(),
+    color: None,
+    background: None,
+    highlighted_background: None,
+    highlighted_color: None,
+  };
+
+  let mut delimiter_style = TextStyle {
+    text: ": ".to_string(),
+    color: None,
+    background: None,
+    highlighted_background: None,
+    highlighted_color: None,
+  };
+
+  let mut answer_style = TextStyle {
+    text: "".to_string(),
+    color: None,
+    background: None,
+    highlighted_background: None,
+    highlighted_color: None,
+  };
+
+  match yaml_obj["interactive_style"].as_hash() {
+    Some(v) => {
+      for (key, value) in v {
+        if let Some(key_str) = key.as_str() {
+          if key_str == "prefix" {
+            prefix_style = parse_yaml_style(value);
+          } else if key_str == "delimiter" {
+            delimiter_style = parse_yaml_style(value);
+          } else if key_str == "question" {
+            question_style = parse_yaml_style(value);
+          } else if key_str == "answer" {
+            answer_style = parse_yaml_style(value);
+          }
+        }
+      }
+    },
+    None => (),
+  };
+
+  (
+    prefix_style,
+    question_style,
+    delimiter_style,
+    answer_style,
+  )
+}
 
 #[cfg(test)]
 mod tests {
     use super::*;
+
     #[test]
     fn get_console_string_works() {
         let test_string = "12345";
